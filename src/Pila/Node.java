@@ -9,12 +9,12 @@ package Pila;
  *
  * @author Bran PC
  */
-class Node<E> {
+class Node {
 
    Node next;
-    E item;
+    String item;
 
-    Node(E dato) {
+    Node(String dato) {
         this.item=dato;
     }
 
@@ -22,7 +22,7 @@ class Node<E> {
         return next;
     }
 
-    public E getItem() {
+    public String getItem() {
         return item;
     }
     

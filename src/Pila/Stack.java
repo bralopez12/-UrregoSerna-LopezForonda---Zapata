@@ -9,17 +9,17 @@ package Pila;
  *
  * @author Bran PC
  */
-public interface Stack<E> {
+public interface Stack {
     
     
     boolean isEmpty();
     
-    E peek();
+    String peek();
     
-    E pop();
+    String pop();
     
     
     
-    void push(E target);
+    void push(String target);
     
 }

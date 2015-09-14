@@ -11,34 +11,33 @@ package Pila;
  */
 public class ListPostFija<E> {
     
-    LinkedStack<E> p = new LinkedStack<E>();//sera la pila de los operadores
-    LinkedList<E> expresion = new LinkedList<E>();//alamcenara  la expresion postfija
+    LinkedStack p = new LinkedStack();//sera la pila de los operadores
+    LinkedList expresion = new LinkedList();//alamcenara  la expresion postfija
     
-    
-    
-    public String[] infijo_A_postFijo(E arreglo[]) {
+   
+    public String[] infijo_A_postFijo(String arreglo[]) {
         for (int i = 0; i < arreglo.length; i++) {
-            if (this.operador((String) arreglo[i])) {
+            if (this.operador(arreglo[i])) {
                 if (arreglo[i].equals("(")) {//si el caracter es parentesis izquierdo
                     p.push(arreglo[i]);//agregamos el el parentesis izquierdo a la pila
                 } else if (arreglo[i].equals(")")) {//si el caracter es parentesis derecho
                     // desplegamos el elemento cima de la pila a la expresion hasta que el 
                     //elemento de la cima n sea parantesis izquierdo
                     //(el parentesis izquierdo nose incluye en la expresion
-                    while (!p.isEmpty() && !p.getsize().equals("(")) {
-                        expresion.addEnd((E) p.getsize());//agregamos el elemento cima  a la expresion
+                    while (!p.isEmpty() && !p.getCima().equals("(")) {
+                        expresion.addFinal(p.getCima());//agregamos el elemento cima  a la expresion
                         p.pop();
                     }
                     p.pop();//desplegamos el parentesis izquierdo pero no lo agregamos a la expresion
                 } 
                 //si la pila esta vacia o la precedencia del caracter es mayor que el elemento de la cima de la pila
-                else if (p.isEmpty() || precedencia((String) arreglo[i]) > precedencia((String) p.getsize())) {
+                else if (p.isEmpty() || precedencia(arreglo[i]) > precedencia(p.getCima())) {
                     p.push(arreglo[i]);//agregamos el operador a la pila
                 } else {
                     //repetimos el procedimiento hasta que la pila no este vacia 
                     // o la preedencia del caracter es menor o igual que el elemento de la cima de la pila
-                    while (!p.isEmpty() && precedencia((String) arreglo[i]) <= precedencia((String) p.getsize())) {
-                        expresion.addEnd((E) p.getsize());//agregamos el elemento cima  a la expresion
+                    while (!p.isEmpty() && precedencia(arreglo[i]) <= precedencia(p.getCima())) {
+                        expresion.addFinal(p.getCima());//agregamos el elemento cima  a la expresion
                         p.pop();//desplegamos el elemento cima de la pila
 
                     }
@@ -46,15 +45,15 @@ public class ListPostFija<E> {
                 }
 
             } else {// si no es un operador entonces es un real
-                expresion.addEnd(arreglo[i] );//agregamos el real a la expresion
+                expresion.addFinal(arreglo[i] );//agregamos el real a la expresion
             }
         }//fin for i
 
         //cuando ya se ha terminado de evaluar los caracteres del arreglo
        //pasamos a agregar los elementos sobrantes de la pila a la expresion
         while (!p.isEmpty()) {//mientras haya elementos en la pila
-            if (!p.getsize().equals("(")) {//no se incluye en la expresion el parentesis izquierdo
-                 expresion.addEnd((E) p.getsize());//agregamos el elemento cima  a la expresion
+            if (!p.getCima().equals("(")) {//no se incluye en la expresion el parentesis izquierdo
+                 expresion.addFinal(p.getCima());//agregamos el elemento cima  a la expresion
             }
             p.pop();//desplegamos el elemento cima de la pila
         }
@@ -64,7 +63,7 @@ public class ListPostFija<E> {
         
          Node p=expresion.top;  
         for (int i = 0; i < expresionPostfija.length; i++) {
-            expresionPostfija[i]=(String) p.item;
+            expresionPostfija[i]=p.item;
             p=p.next;
         }
         return expresionPostfija;//retorna la expresion postfija
@@ -109,6 +108,5 @@ public class ListPostFija<E> {
         }
         return prf;
     }
-
-    
+ 
 }

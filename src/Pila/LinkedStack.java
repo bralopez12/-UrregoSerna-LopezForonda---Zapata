@@ -9,7 +9,7 @@ package Pila;
  *
  * @author Bran PC
  */
-public class LinkedStack<E> implements Stack<E>{
+public class LinkedStack implements Stack{
 
     LinkedList pila;
     int size;
@@ -32,22 +32,29 @@ public class LinkedStack<E> implements Stack<E>{
     }
 
     @Override
-    public E peek() {
+    public String peek() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public E pop() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String pop() {
+        String datos = null;
+        if (!isEmpty()) {
+
+            pila.eliminar();
+            size--;
+        }
+
+        return datos;
     }
 
     @Override
-    public void push(E target) {
+    public void push(String target) {
         size++;
-        pila.addEnd(target);
+        pila.addFinal(target);
     }
     
-    public Object getsize(){
+     public String getCima(){
         return pila.end.item;
     }
 

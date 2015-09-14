@@ -1,6 +1,9 @@
 
 package Interface;
 
+import Pila.ArregloString;
+import Pila.EPostfija;
+import Pila.ListPostFija;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -16,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -153,11 +157,12 @@ JLabel m1;
         app.setLocation(500, 50);
      }
     
-    
+        String expresionPostFija[] ;//almacenara en un arreglo la expresion postfija
+
     
     public void actionPerformed(ActionEvent ae) {
  
-        try {
+        
  
             switch (ae.getActionCommand()) {
  
@@ -234,6 +239,51 @@ JLabel m1;
                     break;
                 
                 case "=":
+                    
+                    
+                        try{
+            
+            ArregloString m = new ArregloString();
+            String arreglo[] = m.pasarString_a_un_arreglo(Resultado.getText());//pasamos a un arreglo la expresion infija ingresada
+            ListPostFija obj = new ListPostFija();//creamos un objeto de la clase PostFijo para poder acceder a sus metodos y vriables
+
+            //a*(b+c-(d/e^f)-g)-h
+             
+            expresionPostFija = obj.infijo_A_postFijo(arreglo);//llamamos al metodo infijo_A_postFijo el cual retorna la expresion postfija como un arreglo de strings
+            String postfija = null;
+            //imprimimos la expreson postfija
+            for (int i = 0; i < expresionPostFija.length; i++) {
+                 postfija = postfija + expresionPostFija[i];
+            }
+            
+      
+        
+        
+        // EVALUAR
+        
+          boolean accion = false;//alamacena true si la expresion postfija tinene alguna variable
+        
+
+            String a[] = expresionPostFija;//copiamos temporalmente en un arreglo la expresion postfija
+            
+
+            //si la expresion postfija no tiene ninguna variable
+                EPostfija n = new EPostfija();//creamos un objeto de la clase EvaluacionPostFija
+                //pasamos a evaluar la expresion postfija               
+                Resultado.setText(n.evaluarExpresion(expresionPostFija));//imprime en pantalla el resultado de la evaluacion
+              
+           
+                if(Resultado.getText().toString().equals("Infinity")){
+            JOptionPane.showMessageDialog(null, "ERROR AL DIVIDIR POR CERO", "ERROR EN SINTAXIS", JOptionPane.ERROR_MESSAGE);
+                Resultado.setText("");
+                }
+       
+                        }catch(Exception E){
+                                        JOptionPane.showMessageDialog(null, "Revice que los datos ingresados sean correctos", "ERROR EN SINTAXIS", JOptionPane.ERROR_MESSAGE);
+
+                        }
+                    
+                    
                   
                     break;
                 case "DEL":
@@ -241,14 +291,13 @@ JLabel m1;
                      Resultado.setText(Resultado.getText().substring(0, Resultado.getText().length()-1));
                      }
                     
+                
                    
                    
  
             }
  
-        } catch (Exception E) {
-            throw new UnsupportedOperationException("ERROR EN LOS BOTONES"); //To change body of generated methods, choose Tools | Templates.
-        }
+        
     
     }
 }

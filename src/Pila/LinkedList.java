@@ -9,9 +9,9 @@ package Pila;
  *
  * @author Bran PC
  */
-class LinkedList<E> {
+class LinkedList {
     
-        public Node getTop() {
+     public Node getTop() {
         return top;
     }
 
@@ -22,16 +22,20 @@ class LinkedList<E> {
     Node top, end;//almena las referencias del inicio y el final de la lista
     int tamaño;//almacena el numero de elementos en la lista
 
-  
-    public void addEnd(E dato) {
-        Node nodo = new Node(dato);
+    /**
+     * agrega un nuevo elemento al final de la lista enlazada simple
+     *
+     * @param dato
+     */
+    public void addFinal(String dato) {
+        Node nuevo = new Node(dato);
         if (top == null) {
-            top = nodo;
-            end = nodo;
+            top = nuevo;
+            end = nuevo;
             tamaño++;
         } else {
-            end.next = nodo;
-            end = nodo;
+            end.next = nuevo;
+            end = nuevo;
             tamaño++;
         }
     }
@@ -71,7 +75,6 @@ class LinkedList<E> {
         tamaño=0;
     }
 
-   
+  
 
-    
 }
