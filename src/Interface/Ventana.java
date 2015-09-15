@@ -124,7 +124,7 @@ JLabel m1;
         Panel.add(bigual);
         bigual.setBounds(x*3,y*5,a,l);
         Panel.add(bDEL);
-        bDEL.setBounds(x*4, i, a, l);
+        bDEL.setBounds(x*4, i, a+2, l);
         
         b0.addActionListener(this);
         b1.addActionListener(this);
