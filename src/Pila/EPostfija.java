@@ -12,62 +12,61 @@ package Pila;
 public class EPostfija {
     
       public String evaluarExpresion(String arregloPostFijo[]) {
-        LinkedStack p = new LinkedStack();//creamos una pila
+          // Se crea una pila
+        LinkedStack p = new LinkedStack();
        
-        //mientras haya elementos en el arregloPostFijo
+       
         for (int i = 0; i < arregloPostFijo.length; i++) {
-            if (operador(arregloPostFijo[i])) {//si el elemto del arreglo es un operador
-                //el algoritmo nos dice que debemos quitar los dos elemtos de la cima de la pila realizar la operacion que corresponde al operador
-                //y agregar ese nuevo resultado a la pila
-                //ejemplo el operador es l "-" ,y  b esta en la cima y luego le sigue a, entonces se agregaria a la pila a-b
-
-                String b = p.getCima();
-                p.pop();//quitamos el elemeto de la cima
-                String a = p.getCima();
-                p.pop();//quitamos el elemeto de la cima
+            
+            // Si la posicion del postfijo es un operador entonces.. : Brayan L.
+            if (operador(arregloPostFijo[i])) {
                 
+                String b = p.getCima();
+                //quitamos el elemeto de la cima. Brayan L.
+                p.pop();
+                String a = p.getCima();
+                p.pop();
+                
+                
+                //AGREGAMOS ALA PILA EL REULTADO DE a operador b : Brayan L.
+                // Se Convierte de double a String porque la pila es de STRING : Brayan L.
                 if (arregloPostFijo[i].equals("+")) {
                    double a_b= Double.parseDouble(a)+Double.parseDouble(b);
-                    p.push(Double.toString(a_b));//agregamos a la pila el resultado de  " a oprador b"
+                    p.push(Double.toString(a_b));
                 }
                 if (arregloPostFijo[i].equals("-")) {
                    double a_b= Double.parseDouble(a)-Double.parseDouble(b);
-                    p.push(Double.toString(a_b));//agregamos a la pila el resultado de  " a oprador b"
+                    p.push(Double.toString(a_b));
                 }
                 if (arregloPostFijo[i].equals("*")) {
                    double a_b= Double.parseDouble(a)*Double.parseDouble(b);
-                    p.push(Double.toString(a_b));//agregamos a la pila el resultado de  " a oprador b"
+                    p.push(Double.toString(a_b));
                 }
                 if (arregloPostFijo[i].equals("/")) {
                    double a_b= Double.parseDouble(a)/Double.parseDouble(b);
-                    p.push(Double.toString(a_b));//agregamos a la pila el resultado de  " a oprador b"
-                }
-                 if (arregloPostFijo[i].equals("^")) {
-                   double a_b=Math.pow(Double.parseDouble(a), Double.parseDouble(b));
-                     
-                    p.push(Double.toString(a_b));//agregamos a la pila el resultado de  " a oprador b"
+                    p.push(Double.toString(a_b));
                 }
                 
-                //en la instruccion anterior note se convierte el double en String   eso es porque nuestra pila es de Strings
+                
+                
             } else {
-                p.push(arregloPostFijo[i]);//agregamos el numero a la pila
+                
+                // Acá se agrega el número a la pila
+                p.push(arregloPostFijo[i]);
             }
         }
 
-        //cuando ya se ha terminado de evaluar la expresion postfija la respuesta es elemeto restante de la pila
+       
         return p.getCima();
     }
 
-    /**
-     * valida si un caracter es un operador "(,),+,-,*,/,^"
-     *
-     * @param a
-     * @return retorna true si el parametro a es un operador
-     */
+   
+      
+      // Este Metodo Verifica sí es un operador : Brayan L-
     private boolean operador(String a) {
         boolean respuesta = false;
         if (a.equals("+") || a.equals("-")
-                || a.equals("*") || a.equals("/") || a.equals("^")) {
+                || a.equals("*") || a.equals("/") ) {
             respuesta = true;
         }
         return respuesta;

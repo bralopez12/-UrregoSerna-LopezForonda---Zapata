@@ -15,32 +15,32 @@ class LinkedList {
         return top;
     }
 
+     
     public Node getEnd() {
         return end;
     }
 
-    Node top, end;//almena las referencias del inicio y el final de la lista
-    int tamaño;//almacena el numero de elementos en la lista
+    // Almacena inicio y final en la lista;
+    Node top, end;
+    
+    int tamaño;
 
-    /**
-     * agrega un nuevo elemento al final de la lista enlazada simple
-     *
-     * @param dato
-     */
+   // Agrega un nuevo nodito 
     public void addFinal(String dato) {
-        Node nuevo = new Node(dato);
+        Node node = new Node(dato);
         if (top == null) {
-            top = nuevo;
-            end = nuevo;
+            top = node;
+            end = node;
             tamaño++;
         } else {
-            end.next = nuevo;
-            end = nuevo;
+            end.next = node;
+            end = node;
             tamaño++;
         }
     }
 
-    public void eliminar() {
+    //Elimina un nodo
+      public void eliminar() {
 
         if (tamaño == 1) {
             top = null;
@@ -57,24 +57,7 @@ class LinkedList {
         }
 
     }
-
-    public void imprimir() {
-        Node aux = top;
-        while (aux != null) {
-            System.out.println(aux.item);
-            aux = aux.next;
-        }
-    }
-
-    /**
-     * vacia la lista enlazad simle
-     */
-    public void vaciarLista() {
-        top = null;
-        end = null;
-        tamaño=0;
-    }
-
   
+
 
 }

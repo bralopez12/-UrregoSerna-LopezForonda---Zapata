@@ -8,38 +8,43 @@ package Pila;
 /**
  *
  * @author Bran PC
+ * La expresión infija es la que ingresa el usuario
  */
 public class ArregloString {
      public String[] pasarString_a_un_arreglo(String expresionInfija) {
-        // TODO code application logic here
 
-        String[] a = expresionInfija.split("");//almacena el string expresionInfija en un arreglo
+         // Se mete todo el texto de TextField Resultado en un arreglo 
+        String[] a = expresionInfija.split("");
         
-        
-        LinkedList r=new LinkedList();//cremos una lista enlazada simple en donde se almacenara los caracteres de la expresionInfija ingresada
+        // lista de operadores
+        LinkedList r =new LinkedList();
         String aux = "";
 
+        
+        // Acá es donde se separan los números y los operadores
         for (int i = 0; i < a.length; i++) {
-            if (this.operador(a[i])) {// si el caracter leido es un operando
+            
+            // Si es un operador ingreselo a la lista : Brayan L.
+            if (this.operador(a[i])) {
 
-                if (!aux.equals("")) {//si el suxiliar NO esta vacio
-                    r.addFinal(aux);//agregamos el aux a la lista
-                    aux = "";//como ya se agrego el aux a la lista volvemos a su valor por defecto
+                if (!aux.equals("")) {
+                    r.addFinal(aux);
+                    aux = "";
                 }
-                r.addFinal(a[i]); //agregamos el operador a la lista
+                r.addFinal(a[i]); //agregamos el operador a la lista : Brayan L.
 
+                // Si no es un operador entonces junte los numeros y agreguelos a la lista : Brayan L.
             } else {
-                aux += a[i];//acumulamos el auxiliar, es decir si el caracter anterior era 4 y el actual es 5
-                //entonces aux="45"
+                aux += a[i];
             }
-            if (i == a.length - 1 && !this.operador(a[i])) {//validamos que ya estamos en el final de la lista y ademas el caracter leido no es un operador
-                r.addFinal(aux);//agregamos el aux a la lista
+            if (i == a.length - 1 && !this.operador(a[i])) {
+                r.addFinal(aux);
                 aux = "";
             }
-        }//fin del for
+        }
         
         
-        //copiamos la lista enlazada a un arreglo
+        //copiamos la linkedlist a un arreglo
         Node p=r.top;  
         String arreglo[]=new String[r.tamaño];
         for (int i = 0; i < arreglo.length; i++) {
@@ -48,18 +53,14 @@ public class ArregloString {
         }
         
         
-        return arreglo;//retornamos el arreglo con los caracteres almacenados
+        return arreglo;
     }
 
-    /**
-     * valida si un caracter es un operador "(,),+,-,*,/,^"
-     * @param a
-     * @return retorna true si el parametro a es un operador
-     */
+   // Comprueba si es un operador
     private boolean operador(String a) {
         boolean respuesta = false;
         if (a.equals("(") || a.equals(")") || a.equals("+") || a.equals("-")
-                || a.equals("*") || a.equals("/") || a.equals("^")) {
+                || a.equals("*") || a.equals("/")) {
             respuesta = true;
         }
         return respuesta;
