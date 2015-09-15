@@ -13,6 +13,8 @@ import java.awt.HeadlessException;
 import java.util.Locale;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -149,6 +151,35 @@ JLabel m1;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         setIconImage(new ImageIcon(getClass().getResource("/Imagenes/calculadora.png")).getImage());
+        
+        
+        Resultado.addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyTyped(KeyEvent ke) {
+                
+                 char c=ke.getKeyChar(); 
+             
+         
+          if(Character.isLetter(c)) { 
+              getToolkit().beep(); 
+               
+              ke.consume(); 
+               
+                                                      JOptionPane.showMessageDialog(null, "Solo se permiten operadores matematicos", "ERROR EN SINTAXIS", JOptionPane.ERROR_MESSAGE);
+
+               
+          } 
+            }
+
+            @Override
+            public void keyPressed(KeyEvent ke) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent ke) {
+            }
+        });
     }
     
     public static void main(String[] args) {
@@ -279,7 +310,7 @@ JLabel m1;
                 }
        
                         }catch(Exception E){
-                                        JOptionPane.showMessageDialog(null, "Revice que los datos ingresados sean correctos", "ERROR EN SINTAXIS", JOptionPane.ERROR_MESSAGE);
+                                        JOptionPane.showMessageDialog(null, "Revise que los datos ingresados sean correctos", "ERROR EN SINTAXIS", JOptionPane.ERROR_MESSAGE);
 
                         }
                     
